@@ -9,6 +9,13 @@ app.get("/",(req,res) => {
     res.send("Hello Rani and Anvesh from server")
 })
 
+// Dynamic routes able to give the user name and password
+app.get("/user/:userId/:name/:password",(req,res) => {
+    console.log(req.params)
+    res.send({firstName:"Anvesh",lastName:"Sodisetti"})
+})
+
+//
 app.post("/user",(req,res) => {
     res.send("Hello posted successfully")
 })
