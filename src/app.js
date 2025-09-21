@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 
-const {adminAuth} = require("./middlewares/auth")
+const { adminAuth } = require("./middlewares/auth")
 
 /* Here in this we handling the multiple routes with next() by calling the routes 
 until server responseds with response */
@@ -95,8 +95,23 @@ app.use("/admin", adminAuth)
 
 app.get("/admin/getAllData", (req, res) => {
     console.log("Get All data")
-    res.send("Demon fethed all data")
+    res.send("Demon fetched all data")
 })
+
+
+// Middleware and error handling
+
+app.get("/getAllUser",(req,res) => {
+    throw new Error("sdfasdf")
+    
+});
+
+app.use("/", (err, req, res, next) => {
+    if (err) {
+        res.status(500).send("something went wrong")
+    }
+})
+
 
 app.listen(3000, () => {
     console.log("Server runnning smoothly....")
