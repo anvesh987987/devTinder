@@ -1,11 +1,11 @@
 const express = require("express")
 const app = express()
 
-
+const {adminAuth} = require("./middlewares/auth")
 
 /* Here in this we handling the multiple routes with next() by calling the routes 
 until server responseds with response */
-app.use("/user", (req, res, next) => {
+app.get("/user", (req, res, next) => {
     console.log("Handling the route user with 1st response")
     next()
 
@@ -19,7 +19,7 @@ app.use("/user", (req, res, next) => {
 
 /*  Here another type we handling the multiple routes with next() by calling the routes in array 
 until server responseds with response */
-app.use("/testUser",
+app.get("/testUser",
     [(req, res, next) => {
         console.log("Handling the route testUser with 1st response")
         next()
@@ -45,7 +45,7 @@ until server responseds with response */
 
 // app.use("/route,rH,[rH2,rH3],rH4,rH5")
 
-app.use("/testUser2",
+app.get("/testUser2",
     (req, res, next) => {
         console.log("Handling the route testUser2 with 1st response")
         next()
@@ -89,6 +89,13 @@ app.delete("/user", (req, res) => {
 
 app.get("/bride", (req, res) => {
     res.send("Hello anvesh from server")
+})
+
+app.use("/admin", adminAuth)
+
+app.get("/admin/getAllData", (req, res) => {
+    console.log("Get All data")
+    res.send("Demon fethed all data")
 })
 
 app.listen(3000, () => {
